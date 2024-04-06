@@ -40,3 +40,37 @@
     display: flex;
     flex-wrap: wrap;
 }
+.shimmer-card{
+    width: 200px;
+    height: 500px;
+    border: 1px solid lightgray;
+    padding: 10px;
+    margin: 10px;
+    background: #fff;
+}
+.shimmer-card > .img{
+    height: 200px;
+    width: 200px;
+    background: lightgray;
+    transition: width 1s ease ;
+    -webkit-mask:linear-gradient(-90deg,#000 30%,#0005,#000 70%) right/300% 100%;
+    background-repeat: no-repeat;
+    animation: shimmer 2.5s infinite;
+
+
+}
+.shimmer-card > .single-line-data{
+    margin: 10px 0px;
+    width: 200px;
+    height: 40px;
+    background: lightgray;
+    transition: width 1s ease;
+    -webkit-mask:linear-gradient(-90deg,#000 30%,#0005,#000 70%) right/300% 100%;
+    background-repeat: no-repeat;
+    animation: shimmer 2.5s infinite;
+
+}
+
+@keyframes shimmer {
+    100% {-webkit-mask-position:left}
+  }

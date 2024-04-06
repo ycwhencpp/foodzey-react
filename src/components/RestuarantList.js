@@ -1,12 +1,11 @@
 import { CLOUDINARY_IMAGE_URL } from "../constants";
 import Shimmer from "./Shimmer";
 import NotFound from "./NotFound";
-import { ShimmerSimpleGallery } from "react-shimmer-effects";
 
-const RestuarantCard = ({ name, avgRatingString, sla, cloudinaryImageId, cuisines }) => {
+const RestuarantCard = ({ name = '', avgRatingString = '', sla, cloudinaryImageId , cuisines }) => {
   return (
     <div className="card">
-      <img src={CLOUDINARY_IMAGE_URL + cloudinaryImageId + "/"} />
+      <img src={CLOUDINARY_IMAGE_URL + (cloudinaryImageId ?? '') + "/"} />
       <h1>{name}</h1>
       <h2>{avgRatingString} Stars</h2>
       <h3>Time : {sla.slaString}</h3>
@@ -17,11 +16,8 @@ const RestuarantCard = ({ name, avgRatingString, sla, cloudinaryImageId, cuisine
 const RestuarantList = ({ resData, realData }) => {
   if (realData.length === 0) {
       return ( 
-        <ShimmerSimpleGallery card col = {4} imageHeight={300} caption />
+        <Shimmer/>
       )
-
-      
-
   }
   return (
     <div className="restuarant-list">
