@@ -1,14 +1,13 @@
 import React from "react";
-import { useState } from "react";
-import { RestuarantCardData } from "../constants";
+import { useState} from "react";
 
-function FilterRestuarantCard(FilteredRestuarantCardData, SearchText) {
-  return RestuarantCardData.filter((restuarant) => restuarant.info.name.includes(SearchText));
+function FilterRestuarantCard(realData, SearchText) {
+  return realData.filter((restuarant) => restuarant.info.name.toLowerCase().includes(SearchText.toLowerCase()));
 }
 
-const SearchBar = ({ setRealData }) => {
+const SearchBar = ({RealData, onSearch}) => {
+
   const [SearchText, setSearchText] = useState("");
-  const [FilteredRestuarantCardData, setFilteredRestuarantCardData] = useState(RestuarantCardData);
   return (
     <React.Fragment>
       <div className="search-bar">
@@ -19,16 +18,14 @@ const SearchBar = ({ setRealData }) => {
           value={SearchText}
           onChange={(e) => {
             setSearchText(e.target.value);
-            const dataw = FilterRestuarantCard(FilteredRestuarantCardData, e.target.value);
-            setFilteredRestuarantCardData(dataw);
-            setRealData(dataw);
+            const data = FilterRestuarantCard(RealData, e.target.value);
+            onSearch(data);
           }}
         />
         <button
           onClick={() => {
-            const data = FilterRestuarantCard(RestuarantCardData, SearchText);
-            setFilteredRestuarantCardData(data);
-            setRealData(data);
+            const data = FilterRestuarantCard(RealData, SearchText);
+            onSearch(data);
           }}>
           Search
         </button>
