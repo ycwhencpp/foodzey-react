@@ -8,6 +8,7 @@ import Error404 from "./components/404";
 import ErrorAbout404 from "./components/About404";
 import Shimmer from "./components/Shimmer";
 import RestuarantMenu from "./components/RestaurantMenu";
+import ProfileClass from "./components/ProfileClass";
 
 
 // root elemet
@@ -45,6 +46,10 @@ const appRouter = createBrowserRouter([
         element: <RestuarantMenu/>,
         errorElement : <ErrorAbout404/>,
 
+      },
+      {
+        path: 'profile',
+        element: <ProfileClass/>,
       }
     ]
   },
