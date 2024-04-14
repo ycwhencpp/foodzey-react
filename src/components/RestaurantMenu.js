@@ -1,19 +1,10 @@
-import { useEffect, useState } from "react"
 import { CLOUDINARY_IMAGE_URL } from "../constants";
 import {useParams} from "react-router-dom";
 import NotFound from "./NotFound";
 import ShimmerResturantMenu from "./ShimmerResturantMenu";
+import useRestuarant from "../utils/useRestuarant";
 
-const getResturantMenu = async (res_id,setResMenu, setIsMenuFound) =>{
-    const response = await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.65420&lng=77.23730&restaurantId=${res_id}&catalog_qa=undefined&isMenuUx4=true&submitAction=ENTER`);
-    const data = await response.json();
-    const card_data =  data?.data?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
-    setResMenu(card_data);
-    if (!card_data) {
-        setIsMenuFound(false);
-    }
 
-}  
 // function 
 const RestuarantMenuContainer  = ({itemCards, title}) =>{
     if (itemCards) {
@@ -48,14 +39,13 @@ const ResMenuItems = ({name, description, imageId, ratings, price =''}) => {
 
 
 const RestuarantMenu = () => {
+    console.log("render");
     const res_id = useParams();
-    const [ResMenu, setResMenu] = useState(null);
-    const [IsMenuFound, setIsMenuFound] = useState(true);
 
-    useEffect(()=>{
-        getResturantMenu(res_id['res_id'],setResMenu, setIsMenuFound);  
-    },[]);
-    if (!IsMenuFound) {
+    const [ResMenu, isMenuFound] = useRestuarant(res_id);
+    console.log(ResMenu);
+
+    if (!isMenuFound) {
         return <NotFound/>
     } 
     if (!ResMenu) {

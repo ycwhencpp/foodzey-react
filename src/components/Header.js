@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {Link} from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Title = () => (
   <a href="/">
@@ -12,6 +13,7 @@ const Title = () => (
 );
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const IsOnline = useOnlineStatus();
   return (
     <div className="header">
       <Title />
@@ -22,9 +24,8 @@ const Header = () => {
           <li>Contact</li>
           <li>Cart</li>
           <li><Link to ="/profile">Profile</Link></li>
-
-
-
+          <li>{IsOnline ? '✅' : '❌'}</li>
+          <li><Link to ="/instamart">Instamart</Link></li>
         </ul>
       </div>
 
