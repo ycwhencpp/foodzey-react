@@ -18,7 +18,7 @@ const Body = () => {
 
 
   return (
-    <div className="body">
+    <div className="p-5">
       <SearchBar RealData = {RealData} onSearch = {onSearch} />
       <RestuarantList resData={FilteredData} realData = {RealData} />
     </div>

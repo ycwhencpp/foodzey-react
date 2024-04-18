@@ -5,7 +5,7 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 const Title = () => (
   <a href="/">
     <img
-      className="logo"
+      className="w-20 h-20"
       alt="logo"
       src="https://yt3.ggpht.com/ytc/AMLnZu_EC-ECXAxRAixWGEfMsE1rdSoetBHyxmLNdtCB=s900-c-k-c0x00ffffff-no-rj"
     />
@@ -15,10 +15,10 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const IsOnline = useOnlineStatus();
   return (
-    <div className="header">
+    <div className="flex justify-between items-center border border-pink-800 bg-pink-200 pr-5">
       <Title />
-      <div className="nav-items">
-        <ul>
+      <div className="">
+        <ul className="flex gap-4"> 
           <li> <Link to ="/">Home</Link></li>
           <li><Link to ="/about">About</Link></li>
           <li>Contact</li>

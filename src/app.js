@@ -24,9 +24,9 @@ const Layout = () => {
     return <Offline/>
   }
   return (
-    <React.Fragment>
-      <Header />
-      <Outlet/>
+    <React.Fragment >
+        <Header />
+        <Outlet />
     </React.Fragment>
   );
 };

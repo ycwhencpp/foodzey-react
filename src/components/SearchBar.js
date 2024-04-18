@@ -10,8 +10,9 @@ const SearchBar = ({RealData, onSearch}) => {
   const [SearchText, setSearchText] = useState("");
   return (
     <React.Fragment>
-      <div className="search-bar">
+      <div className="mb-5">
         <input
+        className="border border-violet-200 p-2 bg-green-200"
           type="text"
           name="search-input"
           placeholder="Search For a Resturant"
@@ -22,7 +23,7 @@ const SearchBar = ({RealData, onSearch}) => {
             onSearch(data);
           }}
         />
-        <button
+        <button className="ml-5 border border-violet-200 p-2 px-4 rounded-2xl bg-violet-200"
           onClick={() => {
             const data = FilterRestuarantCard(RealData, SearchText);
             onSearch(data);
