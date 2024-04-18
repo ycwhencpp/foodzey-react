@@ -5,10 +5,10 @@ import { Link } from "react-router-dom";
 
 const RestuarantCard = ({ id, name = '', avgRatingString = '', sla, cloudinaryImageId , cuisines }) => {
   return (
-    <Link  to = {"resturant-menu/" + id}>
-      <div className="card">
+    <Link  to = {"resturant-menu/" + id} >
+      <div className="card w-[250px] border-2 border-violet-600 p-3 rounded-md">
           <img src={CLOUDINARY_IMAGE_URL + (cloudinaryImageId ?? '') + "/"} />
-          <h1>{name}</h1>
+          <h1 className="font-bold text-xl pt-2" >{name}</h1>
           <h2>{avgRatingString} Stars</h2>
           <h3>Time : {sla.slaString}</h3>
           <h4>{cuisines.join(", ")}</h4>
@@ -24,7 +24,7 @@ const RestuarantList = ({ resData, realData }) => {
       )
   }
   return (
-    <div className="restuarant-list">
+    <div className="flex flex-wrap gap-5 bg-pink-100">
       {resData.length === 0  ? <NotFound/>  : resData.map((cardData, index) => {
         return (
             <RestuarantCard {...cardData.info} key={cardData.info.id ?? index} />

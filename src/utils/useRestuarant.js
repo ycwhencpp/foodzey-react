@@ -9,8 +9,6 @@ const useRestuarant = ({res_id}) => {
 
     useEffect(()=>{
         console.log("effect");
-        getResturantMenu(res_id);
-
         const getResturantMenu =  async (res_id) => {
             const response = await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=28.65420&lng=77.23730&restaurantId=${res_id}&catalog_qa=undefined&isMenuUx4=true&submitAction=ENTER`);
             const data = await response.json();
@@ -18,6 +16,9 @@ const useRestuarant = ({res_id}) => {
             card_data ? setisMenuFound(true) : setisMenuFound(false);
             setrestrurant(card_data);
         }
+        getResturantMenu(res_id);
+
+
 
     },[]);
 
