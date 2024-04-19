@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {Link} from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import userContext from "../utils/userContext";
 
 const Title = () => (
   <a href="/">
@@ -14,6 +15,7 @@ const Title = () => (
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const IsOnline = useOnlineStatus();
+  const {user} = useContext(userContext);
   return (
     <div className="flex justify-between items-center border border-pink-800 bg-pink-200 pr-5">
       <Title />
@@ -28,8 +30,11 @@ const Header = () => {
           <li><Link to ="/instamart">Instamart</Link></li>
         </ul>
       </div>
-
+      <div>
+      <div>{user.name}- {user.email}</div>
       {isLoggedIn ? <button className="logout" onClick={() => {setIsLoggedIn(!isLoggedIn)}}>Logout</button> : <button className="login" onClick={() => {setIsLoggedIn(!isLoggedIn)}}>Login</button>}
+      </div>
+      
 
     </div>
   );
