@@ -1,5 +1,6 @@
 import {Component} from "react";
 import Profile2 from "./Profile2";
+import userContext from "../utils/userContext";
 class ProfileClass extends Component {
 
     constructor (props) {
@@ -53,14 +54,17 @@ class ProfileClass extends Component {
         console.log("render");
 
         return (
+           
             <div className="profile">
+                 <userContext.Consumer>
+                    { ({user}) =>  <h1> Hello :{user.name} as {user.email}</h1>}
+                </userContext.Consumer>
                  <h1>Profile:</h1>
                  <h2>name: {this.state.userInfo.name}</h2>
                  <h2>age: {this.state.userInfo.age}</h2>
                  <button className="click"> click me </button>
                  <Profile2/>
             </div>
-
         )
     }
 }
