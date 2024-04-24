@@ -19,11 +19,8 @@ const root = ReactDOM.createRoot(root_elem);
 
 const Instamart = lazy(() => import("./components/Instamart"));
 
-
-
-
 const Layout = () => {
-
+  console.log("layout");
   const[user, setUser] = useState({
       name:'anurag',
       email:'anurag@google.com',
@@ -33,11 +30,16 @@ const Layout = () => {
     return <Offline/>
   }
   return (
-    <userContext.Provider value={{user: user}}>
+    <userContext.Provider value={{user:user, setUser}} >
       <React.Fragment >
           <Header />
           <Outlet />
+          {/* <userContext.Provider value ={{user: {
+            name: 'new anurag',
+            email: 'new anurag@gmail.com'
+          }}} > */}
           <Footer/>
+          {/* </userContext.Provider> */}
       </React.Fragment>
     </userContext.Provider>
   );
