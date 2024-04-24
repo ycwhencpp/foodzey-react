@@ -1,12 +1,14 @@
-import { CLOUDINARY_IMAGE_URL } from "../constants";
 import {useParams} from "react-router-dom";
 import NotFound from "./NotFound";
 import ShimmerResturantMenu from "./ShimmerResturantMenu";
 import useRestuarant from "../utils/useRestuarant";
+import { addItem, removeItem } from "../utils/CartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import ResMenuItems from "./ResMenuItems";
 
 
 // function 
-const RestuarantMenuContainer  = ({itemCards, title}) =>{
+const RestuarantMenuContainer  = ({itemCards, title , cartItems, HandelAddItem, HandelRemoveItem}) =>{
     if (itemCards) {
 
         return <div className="menu-card">
@@ -15,7 +17,7 @@ const RestuarantMenuContainer  = ({itemCards, title}) =>{
                 {
                     itemCards.map((item, index) => {
                         if (index < 3) {
-                            return <ResMenuItems {...item.card.info} key = {item.card.info.id} />
+                            return <ResMenuItems {...item.card.info} cartItems = {cartItems} HandelAddItem = {HandelAddItem} HandelRemoveItem = {HandelRemoveItem} key = {item.card.info.id} />
                         }
                     })
                 }
@@ -25,17 +27,7 @@ const RestuarantMenuContainer  = ({itemCards, title}) =>{
 
 }
 
-const ResMenuItems = ({name, description, imageId, ratings, price =''}) => {
-    return (
-        <div className="menu-item" >
-            <img src = {CLOUDINARY_IMAGE_URL +  imageId}/>
-            <h1>{name}</h1>
-            <h2>{description}</h2>
-            {ratings?.aggregatedRating?.rating ? <h3>Ratings: {ratings?.aggregatedRating?.rating} stars</h3> : '' }
-            {price ? <h3>Price : {price/100}Rs </h3> : ''}
-        </div>
-    )
-};
+
 
 
 const RestuarantMenu = () => {
@@ -43,7 +35,15 @@ const RestuarantMenu = () => {
     const res_id = useParams();
 
     const [ResMenu, isMenuFound] = useRestuarant(res_id);
-    console.log(ResMenu);
+    const dispatch = useDispatch();
+    function HandelAddItem (item){
+        dispatch(addItem(item));
+    }
+    function HandelRemoveItem (item){
+        dispatch(removeItem(item));
+    }
+
+    const cartItems = useSelector((state)=> state.cart.items);
 
     if (!isMenuFound) {
         return <NotFound/>
@@ -58,7 +58,7 @@ const RestuarantMenu = () => {
             <div className="menu-cards">
                 {ResMenu.map((menu, index)=>{
                     if (index !=0 && menu.card.card.title) {
-                        return <RestuarantMenuContainer {...menu.card.card} key = {menu.card.card.title ?? index} />
+                        return <RestuarantMenuContainer {...menu.card.card} cartItems = {cartItems} HandelAddItem={HandelAddItem} HandelRemoveItem = {HandelRemoveItem} key = {menu.card.card.title ?? index} />
                     }
                 })}
             </div>

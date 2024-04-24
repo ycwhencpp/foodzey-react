@@ -12,12 +12,15 @@ import useOnlineStatus from "./utils/useOnlineStatus";
 import Offline from "./components/Offline";
 import userContext from "./utils/userContext";
 import Footer from "./components/Footer";
-
+import { Provider } from "react-redux";
+import Store from "./utils/Store";
+import Cart from "./components/Cart";
 // root elemet
 const root_elem = document.getElementById("root");
 const root = ReactDOM.createRoot(root_elem);
 
 const Instamart = lazy(() => import("./components/Instamart"));
+
 
 const Layout = () => {
   console.log("layout");
@@ -30,6 +33,7 @@ const Layout = () => {
     return <Offline/>
   }
   return (
+    <Provider store = {Store}>
     <userContext.Provider value={{user:user, setUser}} >
       <React.Fragment >
           <Header />
@@ -42,6 +46,7 @@ const Layout = () => {
           {/* </userContext.Provider> */}
       </React.Fragment>
     </userContext.Provider>
+    </Provider>
   );
 };
 
@@ -77,6 +82,10 @@ const appRouter = createBrowserRouter([
         element: <Suspense fallback = {<h1>Loading .....</h1>}>
                     <Instamart/>
                 </Suspense>
+      },
+      {
+        path: 'cart',
+        element: <Cart/>,
       },
     ]
   },
