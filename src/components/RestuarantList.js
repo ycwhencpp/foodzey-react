@@ -24,7 +24,7 @@ const RestuarantList = ({ resData, realData }) => {
       )
   }
   return (
-    <div className="flex flex-wrap gap-5 bg-pink-100">
+    <div data-testid="res-list" className="flex flex-wrap gap-5 bg-pink-100">
       {resData.length === 0  ? <NotFound/>  : resData.map((cardData, index) => {
         return (
             <RestuarantCard {...cardData.info} key={cardData.info.id ?? index} />

@@ -53,9 +53,9 @@ const RestuarantMenu = () => {
     }
 
     return (
-        <div className="resturant-menu-details">
+        <div data-testid = "resturant-menu-detail" className="resturant-menu-details">
             <h1> Menu </h1>
-            <div className="menu-cards">
+            <div data-testid = "menu-card" className="menu-cards">
                 {ResMenu.map((menu, index)=>{
                     if (index !=0 && menu.card.card.title) {
                         return <RestuarantMenuContainer {...menu.card.card} cartItems = {cartItems} HandelAddItem={HandelAddItem} HandelRemoveItem = {HandelRemoveItem} key = {menu.card.card.title ?? index} />

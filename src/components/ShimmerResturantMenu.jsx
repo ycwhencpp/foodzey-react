@@ -1,7 +1,7 @@
 const ShimmerResturantMenu = () =>{
-    return <div className="Shimmer-menu-div">
+    return <div data-testid="Shimmer-menu-div" className="Shimmer-menu-div">
         <div className="title"></div>
-        <div className="shimmer-menu-item-container"> 
+        <div  data-testid = "shimmer-menu-item-container" className="shimmer-menu-item-container"> 
 
      {
         Array(4).fill('').map((item,index) => {

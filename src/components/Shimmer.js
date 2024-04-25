@@ -1,6 +1,6 @@
 const Shimmer = () => {
   return (
-    <div className="flex flex-wrap gap-8">
+    <div data-testid="shimmer-res-list" className="flex flex-wrap gap-8">
       {
         Array(10).fill('').map((e,i)=>(
           <div className="w-[250px] h-[400px] border-3 bg-white border-violet-200"  key={i}>
